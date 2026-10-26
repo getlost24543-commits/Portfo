@@ -1,1105 +1,3493 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name=0"theme-color" content="#080b0a">
-  <title>Min Bhone Khant — Personal Portfolio</title>
-
-  <style>
-    :root {
-      --bg: #080b0a;
-      --panel: rgba(255,255,255,.055);
-      --line: rgba(255,255,255,.11);
-      --text: #f2f7f3;
-      --muted: #9ca9a0;
-      --green: #9bffb5;
-      --green2: #3cda83;
-      --radius: 24px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
-
-    body {
-      color: var(--text);
-      background:
-        radial-gradient(ellipse at 75% 5%, rgba(39,190,103,.17), transparent 35%),
-        radial-gradient(ellipse at 8% 45%, rgba(35,110,75,.12), transparent 30%),
-        var(--bg);
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .wrap {
-      width: min(1080px, calc(100% - 40px));
-      margin: auto;
-    }
-
-    /* NAVIGATION */
-
-    .nav-wrap {
-      position: sticky;
-      top: 12px;
-      z-index: 20;
-      padding-top: 12px;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 12px 16px;
-      background: rgba(14,19,16,.72);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 12px 40px #0003;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      letter-spacing: -.03em;
-    }
-
-    .brand-mark {
-      width: 30px;
-      height: 30px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      color: #08140c;
-      background: linear-gradient(135deg, var(--green), var(--green2));
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      color: #bdc8c0;
-      font-size: .9rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--green);
-    }
-
-    .nav-cta,
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      border: 1px solid var(--green);
-      border-radius: 12px;
-      padding: 10px 15px;
-      background: var(--green);
-      color: #07110a;
-      font-weight: 750;
-      transition: .2s;
-      cursor: pointer;
-    }
-
-    .button:hover,
-    .nav-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px #62f79a35;
-    }
-
-    .button.secondary {
-      color: var(--text);
-      background: rgba(255,255,255,.045);
-      border-color: var(--line);
-    }
-
-    .menu-toggle {
-      display: none;
-      border: 1px solid var(--line);
-      color: var(--text);
-      background: var(--panel);
-      border-radius: 10px;
-      padding: 7px 10px;
-      cursor: pointer;
-    }
-
-    /* HERO */
-
-    main {
-      padding-bottom: 50px;
-    }
-
-    .hero {
-      min-height: 650px;
-      display: grid;
-      grid-template-columns: 1.12fr .88fr;
-      align-items: center;
-      gap: 48px;
-      padding: 92px 0 76px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--green);
-      font-size: .78rem;
-      font-weight: 750;
-      text-transform: uppercase;
-      letter-spacing: .14em;
-    }
-
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 14px var(--green);
-    }
-
-    h1 {
-      margin: 18px 0;
-      font-size: clamp(3.2rem, 7vw, 6.2rem);
-      line-height: .98;
-      letter-spacing: -.075em;
-    }
-
-    .gradient-text {
-      color: var(--green);
-      background: linear-gradient(
-        110deg,
-        #f4fff7,
-        #9bffb5 42%,
-        #46db89
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-copy {
-      max-width: 560px;
-      color: var(--muted);
-      font-size: 1.07rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .availability {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 32px;
-      color: #aab7ae;
-      font-size: .88rem;
-    }
-
-    /* GLASS PROFILE CARD */
-
-    .visual {
-      position: relative;
-      min-height: 420px;
-      display: grid;
-      place-items: center;
-    }
-
-    .orb {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(
-        circle at 35% 28%,
-        #a6ffbe 0%,
-        #3dd780 25%,
-        #147847 52%,
-        #071a10 72%
-      );
-      opacity: .85;
-      box-shadow: 0 0 100px #35dc7a30;
-      animation: float 7s ease-in-out infinite;
-    }
-
-    .orb::before,
-    .orb::after {
-      content: "";
-      position: absolute;
-      border: 1px solid #9bffb533;
-      border-radius: 50%;
-      transform: rotateX(68deg) rotateZ(-25deg);
-    }
-
-    .orb::before {
-      inset: -30px;
-    }
-
-    .orb::after {
-      inset: -52px;
-      transform: rotateX(68deg) rotateZ(30deg);
-    }
-
-    .profile-card {
-      position: relative;
-      z-index: 1;
-      width: min(310px, 90%);
-      padding: 23px;
-      border: 1px solid #ffffff22;
-      border-radius: 24px;
-      background: linear-gradient(
-        145deg,
-        rgba(255,255,255,.12),
-        rgba(255,255,255,.035)
-      );
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      box-shadow: 0 25px 80px #0006;
-      transform: rotate(3deg);
-      animation: cardIn .8s both;
-    }
-
-    .profile-top {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .avatar {
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      color: #092012;
-      font-size: 1.25rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #c4ffd2, #40d984);
-    }
-
-    .profile-top strong {
-      display: block;
-    }
-
-    .profile-top small {
-      color: var(--muted);
-    }
-
-    .mini-label {
-      margin: 18px 0 8px;
-      color: var(--green);
-      font-size: .7rem;
-      text-transform: uppercase;
-      letter-spacing: .14em;
-      font-weight: 800;
-    }
-
-    .profile-card h3 {
-      font-size: 1.5rem;
-      line-height: 1.2;
-      letter-spacing: -.04em;
-    }
-
-    .skill-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 17px;
-    }
-
-    .pill {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 5px 9px;
-      color: #d4e0d7;
-      font-size: .75rem;
-      background: #ffffff07;
-    }
-
-    /* SECTIONS */
-
-    section {
-      padding: 66px 0;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 24px;
-      margin-bottom: 28px;
-    }
-
-    .section-kicker {
-      color: var(--green);
-      text-transform: uppercase;
-      font-size: .74rem;
-      font-weight: 800;
-      letter-spacing: .16em;
-    }
-
-    h2 {
-      margin-top: 8px;
-      font-size: clamp(2rem, 4vw, 3.25rem);
-      line-height: 1.05;
-      letter-spacing: -.06em;
-    }
-
-    .section-note {
-      max-width: 390px;
-      color: var(--muted);
-    }
-
-    .glass {
-      border: 1px solid var(--line);
-      background: linear-gradient(
-        145deg,
-        rgba(255,255,255,.065),
-        rgba(255,255,255,.025)
-      );
-      border-radius: var(--radius);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-
-    /* ABOUT */
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 18px;
-    }
-
-    .about-card {
-      padding: 28px;
-    }
-
-    .about-card p {
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .stat {
-      padding: 22px;
-    }
-
-    .stat strong {
-      display: block;
-      color: var(--green);
-      font-size: 2rem;
-      letter-spacing: -.06em;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: .86rem;
-    }
-
-    /* PROJECTS */
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .project {
-      padding: 18px;
-      transition: transform .25s, border-color .25s;
-    }
-
-    .project:hover {
-      transform: translateY(-5px);
-      border-color: #9bffb54a;
-    }
-
-    .project-art {
-      height: 160px;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid #ffffff12;
-      border-radius: 16px;
-      margin-bottom: 18px;
-      background: #101a13;
-    }
-
-    .project-art.one {
-      background:
-        radial-gradient(circle at 70% 20%, #8effad70, transparent 25%),
-        linear-gradient(135deg, #172c20, #0a100d);
-    }
-
-    .project-art.two {
-      background:
-        radial-gradient(circle at 35% 60%, #48d88c55, transparent 35%),
-        linear-gradient(135deg, #17241e, #101513);
-    }
-
-    .project-art.three {
-      background:
-        radial-gradient(circle at 80% 75%, #b0ffbf55, transparent 25%),
-        linear-gradient(135deg, #10261a, #0a100d);
-    }
-
-    .mock-window {
-      position: absolute;
-      inset: 22px 20px;
-      border: 1px solid #d8ffe22b;
-      border-radius: 9px;
-      background: #ffffff08;
-      transform: rotate(-5deg);
-      box-shadow: 0 12px 30px #0004;
-    }
-
-    .mock-window::before {
-      content: "";
-      display: block;
-      height: 13px;
-      border-bottom: 1px solid #ffffff18;
-      background: #ffffff08;
-    }
-
-    .mock-window::after {
-      content: "";
-      display: block;
-      width: 58%;
-      height: 35px;
-      margin: 18px;
-      border-radius: 5px;
-      background: linear-gradient(90deg, #9bffb55c, #9bffb508);
-    }
-
-    .project-meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      color: var(--green);
-      font-size: .76rem;
-    }
-
-    .project h3 {
-      margin: 8px 0;
-      font-size: 1.15rem;
-    }
-
-    .project p {
-      margin-bottom: 15px;
-      color: var(--muted);
-      font-size: .9rem;
-    }
-
-    .text-link {
-      color: #d9ffe3;
-      font-size: .87rem;
-      font-weight: 700;
-    }
-
-    .text-link span {
-      color: var(--green);
-    }
-
-    /* SKILLS */
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-
-    .skill {
-      padding: 19px;
-    }
-
-    .skill-icon {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      color: var(--green);
-      background: #9bffb511;
-      border: 1px solid #9bffb522;
-      font-weight: 800;
-    }
-
-    .skill h3 {
-      margin: 12px 0 3px;
-      font-size: 1rem;
-    }
-
-    .skill p {
-      color: var(--muted);
-      font-size: .82rem;
-    }
-
-    /* CONTACT */
-
-    .contact-box {
-      padding: clamp(24px, 5vw, 52px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 28px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .contact-box h2 {
-      max-width: 550px;
-    }
-
-    .contact-box p {
-      max-width: 520px;
-      margin-top: 12px;
-      color: var(--muted);
-    }
-
-    /* FOOTER */
-
-    footer {
-      padding: 28px 0 36px;
-      border-top: 1px solid #ffffff12;
-      color: var(--muted);
-      font-size: .85rem;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    /* ANIMATIONS */
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity .65s ease, transform .65s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-13px); }
-    }
-
-    @keyframes cardIn {
-      from {
-        opacity: 0;
-        transform: translateY(16px) rotate(0);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) rotate(3deg);
-      }
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 800px) {
-      .hero {
-        min-height: auto;
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 75px 0 48px;
-      }
-
-      .visual {
-        min-height: 360px;
-      }
-
-      .orb {
-        width: 240px;
-        height: 240px;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .projects {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .section-head {
-        align-items: start;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .contact-box {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .wrap {
-        width: calc(100% - 28px);
-      }
-
-      .nav-wrap {
-        top: 6px;
-        padding-top: 6px;
-      }
-
-      nav {
-        padding: 10px 12px;
-      }
-
-      .nav-cta {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: calc(100% + 8px);
-        left: 0;
-        right: 0;
-        padding: 14px;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        background: rgba(10,15,12,.96);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links a {
-        padding: 11px 8px;
-      }
-
-      .hero {
-        padding-top: 65px;
-      }
-
-      h1 {
-        font-size: clamp(3.1rem, 15vw, 4.5rem);
-      }
-
-      .visual {
-        min-height: 330px;
-      }
-
-      .profile-card {
-        width: 285px;
-      }
-
-      section {
-        padding: 48px 0;
-      }
-
-      .projects {
-        grid-template-columns: 1fr;
-      }
-
-      .project-art {
-        height: 180px;
-      }
-
-      .about-card {
-        padding: 22px;
-      }
-
-      .stat {
-        padding: 17px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#eaf5ff">
+<meta name="description" content="ScottCode — software, projects, games, and digital experiments.">
+<title>ScottCode — Digital Playground</title>
+
+<style>
+:root{
+  --bg:#edf6ff;
+  --surface:#ffffff;
+  --surface2:#e1efff;
+  --blue:#1769e8;
+  --blue2:#439bff;
+  --navy:#102c50;
+  --text:#183451;
+  --muted:#647b96;
+  --border:#d2e5fa;
+  --green:#13865d;
+  --red:#c43e56;
+  --shadow:0 18px 55px rgba(38,103,177,.13);
+  --radius:22px;
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:90px;
+}
+
+body{
+  margin:0;
+  color:var(--text);
+  background:var(--bg);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  overflow-x:hidden;
+}
+
+button,input,textarea{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible{
+  outline:3px solid #78baff;
+  outline-offset:3px;
+}
+
+::selection{background:#b9dcff;color:#102c50}
+
+/* ANIMATED BACKGROUND */
+
+.ambient{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  overflow:hidden;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 12% 8%,#b9ddff 0,transparent 40%),
+    radial-gradient(ellipse at 90% 30%,#cbdfff 0,transparent 38%),
+    linear-gradient(140deg,#f4faff,#eaf4ff 60%,#f4f9ff);
+}
+
+.ambient:before,
+.ambient:after{
+  content:"";
+  position:absolute;
+  width:380px;
+  height:380px;
+  border-radius:50%;
+  filter:blur(65px);
+  opacity:.48;
+  animation:float 14s ease-in-out infinite alternate;
+}
+
+.ambient:before{
+  background:#75bdff;
+  top:5%;
+  left:-230px;
+}
+
+.ambient:after{
+  background:#829dff;
+  right:-230px;
+  top:45%;
+  animation-delay:-7s;
+}
+
+@keyframes float{
+  from{transform:translate(0,0)}
+  to{transform:translate(90px,65px)}
+}
+
+.bg-grid{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.25;
+  background-image:
+    linear-gradient(#9dc6f41c 1px,transparent 1px),
+    linear-gradient(90deg,#9dc6f41c 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:linear-gradient(to bottom,black,transparent 90%);
+}
+
+/* NAVIGATION */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(248,252,255,.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(189,216,246,.75);
+}
+
+.nav-wrap{
+  width:min(1180px,92%);
+  min-height:72px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:-.6px;
+  white-space:nowrap;
+}
+
+.brand-mark{
+  width:41px;
+  height:41px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:linear-gradient(140deg,#58b6ff,#1769e8);
+  box-shadow:0 7px 20px #1769e82b;
+}
+
+.brand-mark svg{
+  width:25px;
+  height:25px;
+}
+
+.brand-name span{color:var(--blue)}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:11px 12px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:750;
+  transition:.2s;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+  color:var(--blue);
+  background:#e5f1ff;
+}
+
+.nav-btn.active{
+  box-shadow:inset 0 -2px var(--blue);
+}
+
+.nav-account{
+  border:0;
+  border-radius:12px;
+  padding:11px 15px;
+  background:var(--blue);
+  color:white;
+  font-weight:800;
+  white-space:nowrap;
+  box-shadow:0 6px 17px #1769e82a;
+}
+
+.menu-toggle{
+  display:none;
+  width:43px;
+  height:43px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:white;
+  color:var(--navy);
+  font-size:22px;
+}
+
+/* GENERAL LAYOUT */
+
+.container{
+  width:min(1120px,92%);
+  margin:auto;
+}
+
+.view{
+  display:none;
+  min-height:75vh;
+  padding:45px 0 72px;
+}
+
+.view.active{
+  display:block;
+  animation:appear .25s ease;
+}
+
+@keyframes appear{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:none}
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:var(--blue);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1.6px;
+  text-transform:uppercase;
+}
+
+.eyebrow:before{
+  content:"";
+  width:22px;
+  height:3px;
+  border-radius:5px;
+  background:var(--blue2);
+}
+
+h1{
+  margin:17px 0;
+  color:var(--navy);
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.06;
+  letter-spacing:-3px;
+}
+
+h2{
+  margin:0 0 12px;
+  color:var(--navy);
+  font-size:clamp(29px,4vw,43px);
+  letter-spacing:-1.4px;
+}
+
+h3{
+  margin:0 0 10px;
+  color:var(--navy);
+}
+
+p{line-height:1.8}
+
+.gradient-text{
+  background:linear-gradient(100deg,#1769e8,#48aaff);
+  color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+}
+
+.lead{
+  max-width:650px;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.9;
+}
+
+.muted{color:var(--muted)}
+.small{font-size:13px;line-height:1.7}
+
+.section-heading{margin-bottom:26px}
+.section-heading p{max-width:680px;color:var(--muted)}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:26px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:13px 18px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:white;
+  color:var(--navy);
+  font-weight:800;
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  border-color:#90c5ff;
+  box-shadow:0 9px 22px #1769e813;
+}
+
+.btn.primary{
+  border-color:transparent;
+  background:linear-gradient(115deg,#1769e8,#439bff);
+  color:white;
+  box-shadow:0 9px 22px #1769e826;
+}
+
+.btn.soft{
+  background:#e8f3ff;
+  color:var(--blue);
+  border-color:#d9eaff;
+}
+
+.btn.danger{
+  background:#fff5f6;
+  color:var(--red);
+  border-color:#f6d4db;
+}
+
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+.hidden{display:none!important}
+
+/* HOME HERO */
+
+.hero{
+  min-height:490px;
+  display:grid;
+  grid-template-columns:1.12fr .88fr;
+  align-items:center;
+  gap:42px;
+  padding:28px 0 45px;
+}
+
+.hero h1{max-width:680px}
+
+.hero-art{
+  min-height:340px;
+  display:grid;
+  place-items:center;
+  position:relative;
+}
+
+.art-card{
+  width:min(390px,100%);
+  min-height:285px;
+  padding:25px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid white;
+  border-radius:30px;
+  background:linear-gradient(145deg,#ffffffeb,#dceeffe8);
+  box-shadow:0 28px 80px #286bb52b;
+  animation:cardfloat 6s ease-in-out infinite;
+}
+
+@keyframes cardfloat{
+  0%,100%{transform:translateY(0) rotate(1deg)}
+  50%{transform:translateY(-10px) rotate(-1deg)}
+}
+
+.art-top{
+  display:flex;
+  gap:7px;
+  margin-bottom:25px;
+}
+
+.art-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#b3d8ff;
+}
+
+.art-title{
+  font-size:13px;
+  color:var(--muted);
+  font-weight:800;
+}
+
+.art-code{
+  margin-top:17px;
+  padding:18px;
+  border:1px solid #d9eaff;
+  border-radius:17px;
+  background:#edf6ff;
+  color:#37618f;
+  font-family:ui-monospace,SFMono-Regular,monospace;
+  font-size:13px;
+  line-height:2;
+}
+
+.code-blue{color:#1769e8;font-weight:900}
+.code-green{color:#11865f;font-weight:900}
+
+.art-chip{
+  display:inline-flex;
+  margin-top:16px;
+  padding:8px 12px;
+  border-radius:11px;
+  background:#1769e8;
+  color:white;
+  font-size:12px;
+  font-weight:850;
+}
+
+.float-chip{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:13px 15px;
+  border:1px solid white;
+  border-radius:15px;
+  background:#ffffffeb;
+  box-shadow:var(--shadow);
+  color:var(--navy);
+  font-size:13px;
+  font-weight:850;
+  animation:cardfloat 5s ease-in-out infinite;
+}
+
+.float-chip.one{
+  top:8%;
+  right:-1%;
+  animation-delay:-2s;
+}
+
+.float-chip.two{
+  bottom:5%;
+  left:-2%;
+  animation-delay:-4s;
+}
+
+.chip-icon{
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:#e4f1ff;
+  color:var(--blue);
+  font-size:17px;
+}
+
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin:12px 0 54px;
+}
+
+.stat{
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#ffffffbd;
+}
+
+.stat strong{
+  display:block;
+  color:var(--blue);
+  font-size:24px;
+}
+
+.stat span{
+  color:var(--muted);
+  font-size:13px;
+  font-weight:700;
+}
+
+/* SHARED CARDS */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+.card{
+  padding:23px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.87);
+  box-shadow:0 8px 30px #2c6fb20b;
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+  border-color:#b2d5fb;
+}
+
+.card-icon{
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  margin-bottom:18px;
+  border-radius:15px;
+  background:linear-gradient(140deg,#e7f4ff,#d4eaff);
+  color:var(--blue);
+  font-size:22px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+}
+
+.card .btn{margin-top:10px}
+
+.tag{
+  display:inline-flex;
+  padding:6px 9px;
+  border-radius:8px;
+  background:#e7f2ff;
+  color:var(--blue);
+  font-size:11px;
+  font-weight:850;
+}
+
+/* ABOUT */
+
+.about-layout{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:24px;
+}
+
+.about-panel{
+  padding:27px;
+  border:1px solid var(--border);
+  border-radius:22px;
+  background:#ffffffd9;
+}
+
+.skill-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:18px;
+}
+
+.skill{
+  padding:9px 12px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#eff7ff;
+  color:var(--blue);
+  font-size:13px;
+  font-weight:800;
+}
+
+/* AUTHENTICATION */
+
+.auth-layout{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:30px;
+  align-items:start;
+  max-width:930px;
+  margin:15px auto;
+}
+
+.auth-info{padding:28px 12px}
+
+.auth-info h2{font-size:clamp(32px,4vw,45px)}
+
+.auth-panel{
+  padding:29px;
+  border:1px solid var(--border);
+  border-radius:25px;
+  background:rgba(255,255,255,.95);
+  box-shadow:var(--shadow);
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px;
+  padding:5px;
+  margin-bottom:24px;
+  border-radius:14px;
+  background:#edf5ff;
+}
+
+.tab{
+  padding:12px;
+  border:0;
+  border-radius:10px;
+  background:transparent;
+  color:var(--muted);
+  font-weight:850;
+}
+
+.tab.active{
+  background:white;
+  color:var(--blue);
+  box-shadow:0 3px 12px #1b65b411;
+}
+
+.field{margin-bottom:17px}
+
+.field label{
+  display:block;
+  margin-bottom:8px;
+  color:var(--navy);
+  font-size:13px;
+  font-weight:850;
+}
+
+.field input,
+.field textarea{
+  display:block;
+  width:100%;
+  padding:14px;
+  border:1px solid #d5e4f5;
+  border-radius:12px;
+  background:#fbfdff;
+  color:var(--text);
+  outline:none;
+}
+
+.field input:focus,
+.field textarea:focus{
+  border-color:#69adff;
+  box-shadow:0 0 0 4px #64aaff1c;
+}
+
+.field textarea{
+  min-height:145px;
+  resize:vertical;
+}
+
+.field input::placeholder,
+.field textarea::placeholder{color:#9aadc3}
+
+.notice{
+  margin:14px 0;
+  padding:12px 14px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#f1f7ff;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+  overflow-wrap:anywhere;
+}
+
+.notice.success{
+  background:#effbf6;
+  border-color:#c5efdc;
+  color:#16744f;
+}
+
+.notice.error{
+  background:#fff2f4;
+  border-color:#f3cdd5;
+  color:#ad334b;
+}
+
+.notice.warning{
+  background:#fff8e9;
+  border-color:#f4e2b5;
+  color:#805a13;
+}
+
+.account-box{
+  padding:18px;
+  margin-bottom:20px;
+  border:1px solid var(--border);
+  border-radius:17px;
+  background:#f7fbff;
+}
+
+.account-box strong{color:var(--blue)}
+
+.account-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:15px;
+}
+
+/* CONTACT */
+
+.contact-layout{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:30px;
+  align-items:start;
+}
+
+.contact-form{
+  padding:27px;
+  border:1px solid var(--border);
+  border-radius:23px;
+  background:white;
+  box-shadow:var(--shadow);
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 15px;
+}
+
+.full{grid-column:1/-1}
+
+.contact-form .btn{width:100%}
+
+/* ARCADE — FULL DESIGN IN PART 2 */
+
+.arcade-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:15px;
+  margin-bottom:24px;
+}
+
+.arcade-player{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 16px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#ffffffd9;
+}
+
+.arcade-player-icon{
+  width:39px;
+  height:39px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:#e1efff;
+}
+
+.game-selector{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.game-choice{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:7px;
+  padding:17px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#ffffffd9;
+  color:var(--text);
+  text-align:left;
+  transition:.2s;
+}
+
+.game-choice:hover,
+.game-choice.selected{
+  border-color:#78baff;
+  background:#e9f4ff;
+  box-shadow:0 8px 25px #1769e812;
+  transform:translateY(-2px);
+}
+
+.game-choice strong{font-size:14px}
+.game-choice small{color:var(--muted);font-size:12px;line-height:1.5}
+
+.game-emoji{font-size:25px}
+
+.game-panel{
+  padding:22px;
+  border:1px solid var(--border);
+  border-radius:24px;
+  background:#ffffffed;
+  box-shadow:var(--shadow);
+}
+
+.game-panel-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.game-panel-header p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.game-stage{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+  width:100%;
+}
+
+.game-content.hidden{display:none!important}
+
+.score-line{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  width:100%;
+  margin-top:12px;
+}
+
+.score-box{
+  padding:9px 12px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#f1f7ff;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:800;
+}
+
+.score-box strong{color:var(--blue)}
+
+#snakeCanvas{
+  display:block;
+  width:100%;
+  max-width:460px;
+  aspect-ratio:1;
+  border:1px solid #d4e7fc;
+  border-radius:16px;
+  background:#f5faff;
+  touch-action:none;
+}
+
+.game-controls{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:12px;
+}
+
+.dpad{
+  display:grid;
+  grid-template-columns:repeat(3,48px);
+  grid-template-rows:repeat(2,44px);
+  gap:5px;
+  justify-content:center;
+  margin-top:12px;
+}
+
+.dpad button{
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#edf6ff;
+  color:var(--blue);
+  font-size:19px;
+  font-weight:900;
+}
+
+.dpad button:nth-child(1){grid-column:2;grid-row:1}
+.dpad button:nth-child(2){grid-column:1;grid-row:2}
+.dpad button:nth-child(3){grid-column:2;grid-row:2}
+.dpad button:nth-child(4){grid-column:3;grid-row:2}
+
+.ttt-board{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(70px,95px));
+  gap:9px;
+  justify-content:center;
+}
+
+.ttt-cell{
+  width:100%;
+  aspect-ratio:1;
+  border:1px solid #cfe3fa;
+  border-radius:16px;
+  background:#f1f7ff;
+  color:var(--blue);
+  font-size:35px;
+  font-weight:900;
+}
+
+.ttt-cell:hover{background:#e0efff}
+.ttt-cell:disabled{cursor:default}
+
+.memory-board{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(48px,82px));
+  gap:9px;
+  justify-content:center;
+  width:100%;
+}
+
+.memory-card{
+  aspect-ratio:1;
+  border:1px solid #cfe3fa;
+  border-radius:14px;
+  background:linear-gradient(145deg,#d9edff,#eef7ff);
+  color:var(--blue);
+  font-size:26px;
+  font-weight:900;
+}
+
+.memory-card.flipped,
+.memory-card.matched{
+  background:white;
+  border-color:#8ec5ff;
+}
+
+.memory-card.matched{background:#e7f9f1}
+
+.clicker-card{text-align:center}
+
+.click-target{
+  width:150px;
+  height:150px;
+  border:7px solid #cbe4ff;
+  border-radius:50%;
+  background:linear-gradient(145deg,#58b6ff,#1769e8);
+  color:white;
+  font-size:21px;
+  font-weight:950;
+  box-shadow:0 12px 35px #1769e82b;
+  touch-action:manipulation;
+}
+
+.click-target:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.game-status{
+  min-height:25px;
+  margin-top:17px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+}
+
+.leaderboard{
+  margin-top:22px;
+  padding:22px;
+  border:1px solid var(--border);
+  border-radius:22px;
+  background:#ffffffeb;
+  box-shadow:var(--shadow);
+}
+
+.leaderboard-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:15px;
+}
+
+.leaderboard-list{
+  display:grid;
+  gap:8px;
+}
+
+.leaderboard-row{
+  display:grid;
+  grid-template-columns:48px 1fr auto;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  border:1px solid #e1edfa;
+  border-radius:12px;
+  background:#f8fbff;
+  overflow-wrap:anywhere;
+}
+
+.leaderboard-row strong{color:var(--blue)}
+
+.rank{
+  color:var(--blue);
+  font-weight:900;
+}
+
+.game-note{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+  padding:25px 0;
+  border-top:1px solid var(--border);
+  background:#ffffff85;
+}
+
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+#toast{
+  position:fixed;
+  z-index:200;
+  left:50%;
+  bottom:22px;
+  max-width:90%;
+  padding:13px 18px;
+  border:1px solid #d2e5fb;
+  border-radius:13px;
+  background:white;
+  color:var(--navy);
+  box-shadow:var(--shadow);
+  font-size:14px;
+  font-weight:750;
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,15px);
+  transition:.25s;
+}
+
+#toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+  .nav-wrap{min-height:68px}
+
+  .menu-toggle{display:block}
+
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:68px;
+    left:0;
+    right:0;
+    padding:12px 4% 18px;
+    border-bottom:1px solid var(--border);
+    background:#f8fcfff7;
+    backdrop-filter:blur(20px);
+    box-shadow:0 18px 25px #285e9210;
+  }
+
+  .nav-links.open{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .nav-btn{text-align:left;padding:13px}
+  .nav-account{width:100%;margin-top:4px}
+
+  .hero{
+    grid-template-columns:1fr;
+    gap:5px;
+    padding-top:25px;
+  }
+
+  .hero-art{min-height:330px}
+
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+  .auth-layout,
+  .contact-layout,
+  .about-layout{
+    grid-template-columns:1fr;
+    gap:15px;
+  }
+
+  .game-selector{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:540px){
+  .container,.nav-wrap{width:91%}
+
+  .view{padding:32px 0 55px}
+
+  h1{
+    font-size:45px;
+    letter-spacing:-2.4px;
+  }
+
+  .lead{font-size:15px}
+
+  .grid{grid-template-columns:1fr}
+
+  .stats-row{gap:8px}
+  .stat{padding:13px}
+  .stat strong{font-size:20px}
+  .stat span{font-size:11px}
+
+  .art-card{padding:20px;min-height:260px}
+  .float-chip.one{right:-1%;top:1%}
+  .float-chip.two{left:-1%;bottom:0}
+
+  .auth-panel,.contact-form{padding:20px}
+  .game-panel,.leaderboard{padding:14px}
+  .form-grid{grid-template-columns:1fr}
+
+  .game-choice{padding:13px}
+  .game-choice small{font-size:11px}
+
+  .footer-inner{flex-direction:column}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
 </head>
 
 <body>
+<div class="ambient" aria-hidden="true"></div>
+<div class="bg-grid" aria-hidden="true"></div>
 
-  <!-- NAVIGATION -->
-  <div class="wrap nav-wrap">
-    <nav aria-label="Main navigation">
-      <a class="brand" href="#home">
-        <span class="brand-mark">S</span>
-        <span>Scott<span style="color:var(--green)">.dev</span></span>
-      </a>
+<header class="topbar">
+  <div class="nav-wrap">
 
-      <div class="nav-links" id="navLinks">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+    <a class="brand" href="#home" data-view="home" aria-label="ScottCode home">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M11 8 4 16l7 8"
+                stroke="white" stroke-width="3.3"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 8l7 8-7 8"
+                stroke="white" stroke-width="3.3"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18.5 5 13.5 27"
+                stroke="white" stroke-width="3"
+                stroke-linecap="round"/>
+        </svg>
       </div>
+      <div class="brand-name">Scott<span>Code</span></div>
+    </a>
 
-      <a class="nav-cta" href="#contact">Let’s talk ↗</a>
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      type="button"
+      aria-label="Open navigation"
+      aria-expanded="false">☰</button>
 
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-expanded="false"
-        aria-controls="navLinks"
-        aria-label="Open menu">
-        ☰
-      </button>
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <button class="nav-btn active" data-view="home" type="button">Home</button>
+      <button class="nav-btn" data-view="projects" type="button">Projects</button>
+      <button class="nav-btn" data-view="about" type="button">About</button>
+      <button class="nav-btn" data-view="contact" type="button">Contact</button>
+      <button class="nav-btn" data-view="arcade" type="button">Arcade</button>
+      <button class="nav-account" id="accountNav" data-view="auth" type="button">Login</button>
     </nav>
+
   </div>
+</header>
 
-  <main class="wrap" id="home">
+<main>
 
-    <!-- HERO -->
-    <header class="hero">
-      <div>
-        <div class="eyebrow">
-          <span class="dot"></span>
-          Available for new projects
-        </div>
+<!-- HOME -->
+<section class="view active" id="home">
+  <div class="container">
+
+    <div class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Welcome to ScottCode</div>
 
         <h1>
-          Building digital<br>
-          <span class="gradient-text">things that</span><br>
-          feel different.
+          Ideas become<br>
+          <span class="gradient-text">digital reality.</span>
         </h1>
 
-        <p class="hero-copy">
-          Hey, I’m Scott — a creative developer who likes clean design,
-          thoughtful details, and websites that feel as good as they look.
+        <p class="lead">
+          A personal playground for coding, creative projects,
+          experiments, and games. Explore what I'm building.
         </p>
 
-        <div class="hero-actions">
-          <a class="button" href="#projects">Explore my work ↘</a>
-          <a class="button secondary" href="#about">More about me</a>
-        </div>
+        <div class="actions">
+          <button class="btn primary" data-view="projects" type="button">
+            Explore projects →
+          </button>
 
-        <div class="availability">
-          <span class="dot"></span>
-          Currently learning, building, and experimenting.
-        </div>
-      </div>
-
-      <div class="visual">
-        <div class="orb"></div>
-
-        <div class="profile-card">
-          <div class="profile-top">
-            <div class="avatar">A.</div>
-            <div>
-              <strong>Alex Morgan</strong>
-              <small>Developer & designer</small>
-            </div>
-          </div>
-
-          <div class="mini-label">A little about me</div>
-          <h3>Curious mind.<br>Creative builds.</h3>
-
-          <div class="skill-pills">
-            <span class="pill">Web design</span>
-            <span class="pill">HTML / CSS</span>
-            <span class="pill">JavaScript</span>
-            <span class="pill">Creative tech</span>
-          </div>
+          <button class="btn" data-view="arcade" type="button">
+            Play the Arcade
+          </button>
         </div>
       </div>
-    </header>
 
-    <!-- ABOUT -->
-    <section id="about" class="reveal">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">01 / About</div>
-          <h2>A bit about me.</h2>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-card">
+          <div class="art-top">
+            <span class="art-dot"></span>
+            <span class="art-dot"></span>
+            <span class="art-dot"></span>
+          </div>
+
+          <div class="art-title">A little corner of the internet</div>
+
+          <div class="art-code">
+            <div><span class="code-blue">const</span> dream = "build";</div>
+            <div><span class="code-blue">let</span> ideas = Infinity;</div>
+            <div><span class="code-green">while</span> (learning) {</div>
+            <div>&nbsp;&nbsp;createSomething();</div>
+            <div>}</div>
+          </div>
+
+          <span class="art-chip">● Building something new</span>
         </div>
 
-        <p class="section-note">
-          I enjoy turning ideas into useful, polished digital experiences —
-          one small detail at a time.
-        </p>
-      </div>
-
-      <div class="about-grid">
-        <article class="glass about-card">
-          <p>
-            I’m a curious creator who enjoys exploring how design and
-            technology work together. I care about simple interfaces,
-            smooth interactions, and making the little things feel intentional.
-          </p>
-
-          <p>
-            This portfolio is a starting point. Replace this text with your
-            own story, interests, goals, and the kind of work you want to do.
-          </p>
-
-          <a class="text-link" href="#contact">Get in touch ↗</a>
-        </article>
-
-        <div class="stats">
-          <div class="glass stat">
-            <strong>01+</strong>
-            <span>Years of learning</span>
-          </div>
-
-          <div class="glass stat">
-            <strong>06</strong>
-            <span>Personal experiments</span>
-          </div>
-
-          <div class="glass stat">
-            <strong>∞</strong>
-            <span>Ideas to explore</span>
-          </div>
-
-          <div class="glass stat">
-            <strong>100%</strong>
-            <span>Curiosity powered</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="reveal">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">02 / Selected work</div>
-          <h2>Things I’ve made.</h2>
+        <div class="float-chip one">
+          <span class="chip-icon">⌘</span>
+          Creative coding
         </div>
 
-        <p class="section-note">
-          A few concept projects to show the style. Replace these cards
-          with your real projects and links.
-        </p>
-      </div>
-
-      <div class="projects">
-        <article class="glass project">
-          <div class="project-art one">
-            <div class="mock-window"></div>
-          </div>
-
-          <div class="project-meta">
-            <span>WEB DESIGN</span>
-            <span>01</span>
-          </div>
-
-          <h3>Greenroom Studio</h3>
-          <p>A minimal landing page concept with a calm, editorial layout.</p>
-          <a class="text-link" href="#contact">View project ↗</a>
-        </article>
-
-        <article class="glass project">
-          <div class="project-art two">
-            <div class="mock-window"></div>
-          </div>
-
-          <div class="project-meta">
-            <span>DEVELOPMENT</span>
-            <span>02</span>
-          </div>
-
-          <h3>Focus Dashboard</h3>
-          <p>A simple dashboard concept designed to keep important things clear.</p>
-          <a class="text-link" href="#contact">View project ↗</a>
-        </article>
-
-        <article class="glass project">
-          <div class="project-art three">
-            <div class="mock-window"></div>
-          </div>
-
-          <div class="project-meta">
-            <span>EXPERIMENT</span>
-            <span>03</span>
-          </div>
-
-          <h3>Motion Playground</h3>
-          <p>A visual experiment exploring movement, glow, and glass effects.</p>
-          <a class="text-link" href="#contact">View project ↗</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="reveal">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">03 / Toolbox</div>
-          <h2>What I work with.</h2>
+        <div class="float-chip two">
+          <span class="chip-icon">⚡</span>
+          Ideas in motion
         </div>
-
-        <p class="section-note">
-          A growing set of tools and skills. Only list technologies
-          you’re learning or can use.
-        </p>
       </div>
-
-      <div class="skills-grid">
-        <article class="glass skill">
-          <div class="skill-icon">H</div>
-          <h3>HTML</h3>
-          <p>Structure & accessibility</p>
-        </article>
-
-        <article class="glass skill">
-          <div class="skill-icon">C</div>
-          <h3>CSS</h3>
-          <p>Layouts & visual design</p>
-        </article>
-
-        <article class="glass skill">
-          <div class="skill-icon">JS</div>
-          <h3>JavaScript</h3>
-          <p>Interactions & logic</p>
-        </article>
-
-        <article class="glass skill">
-          <div class="skill-icon">✳</div>
-          <h3>Creative thinking</h3>
-          <p>Ideas into experiences</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="reveal">
-      <div class="glass contact-box">
-        <div>
-          <div class="section-kicker">04 / Contact</div>
-
-          <h2>
-            Have an idea?<br>
-            <span class="gradient-text">Let’s make it real.</span>
-          </h2>
-
-          <p>
-            Have a project, question, or just want to say hello?
-            Add your email or social links so people can reach you.
-          </p>
-        </div>
-
-        <a class="button" href="mailto:hello@example.com">Email me ↗</a>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="wrap footer-inner">
-      <span>
-        © <span id="year"></span> Alex Morgan. Made with curiosity.
-      </span>
-
-      <span>Designed for the web · Built with HTML, CSS & JavaScript</span>
     </div>
-  </footer>
 
+    <div class="stats-row">
+      <div class="stat">
+        <strong>01</strong>
+        <span>Personal website</span>
+      </div>
+
+      <div class="stat">
+        <strong>∞</strong>
+        <span>Ideas to explore</span>
+      </div>
+
+      <div class="stat">
+        <strong>24/7</strong>
+        <span>Digital playground</span>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      <div class="eyebrow">Explore</div>
+      <h2 style="margin-top:12px">What can you do here?</h2>
+      <p>Choose a destination and explore the different parts of ScottCode.</p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-icon">⌘</div>
+        <h3>Projects</h3>
+        <p>Explore web experiments, coding projects, and things I'm working on.</p>
+        <button class="btn soft" data-view="projects" type="button">
+          View projects →
+        </button>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🎮</div>
+        <h3>Arcade</h3>
+        <p>Play browser games, challenge yourself, and try for a high score.</p>
+        <button class="btn soft" data-view="arcade" type="button">
+          Enter Arcade →
+        </button>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">✉</div>
+        <h3>Contact</h3>
+        <p>Have a question or an idea? Send a message through the contact form.</p>
+        <button class="btn soft" data-view="contact" type="button">
+          Get in touch →
+        </button>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="view" id="projects">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">Things I've made</div>
+      <h2 style="margin-top:12px">Projects & experiments.</h2>
+      <p>
+        A collection of digital ideas, experiments, and projects.
+        This space can grow as new things are built.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-icon">🌐</div>
+        <span class="tag">Web development</span>
+        <h3 style="margin-top:15px">ScottCode.fun</h3>
+        <p>
+          This personal website, with its own projects area,
+          account system, contact form, and browser Arcade.
+        </p>
+        <a class="btn soft"
+           href="https://scottcode.fun"
+           target="_blank"
+           rel="noopener noreferrer">
+          Visit website ↗
+        </a>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🎮</div>
+        <span class="tag">Browser games</span>
+        <h3 style="margin-top:15px">ScottCode Arcade</h3>
+        <p>
+          A collection of browser games designed to run on
+          desktop and mobile devices.
+        </p>
+        <button class="btn soft" data-view="arcade" type="button">
+          Play games →
+        </button>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🧪</div>
+        <span class="tag">Experiments</span>
+        <h3 style="margin-top:15px">More coming soon</h3>
+        <p>
+          A place for future experiments, new ideas, and
+          projects that are still taking shape.
+        </p>
+        <button class="btn soft" data-view="contact" type="button">
+          Send an idea →
+        </button>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PART 2 CONTINUES HERE -->
+  <!-- ABOUT -->
+<section class="view" id="about">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">About ScottCode</div>
+      <h2 style="margin-top:12px">Curiosity builds things.</h2>
+      <p>
+        ScottCode is a personal digital playground for learning,
+        experimenting, building projects, and exploring technology.
+      </p>
+    </div>
+
+    <div class="about-layout">
+      <div class="about-panel">
+        <div class="card-icon">💻</div>
+        <h3>A work in progress</h3>
+        <p class="muted">
+          This website brings together personal projects, browser games,
+          and experiments in one place. It's designed to keep growing
+          as new ideas become real projects.
+        </p>
+        <p class="muted">
+          The goal is simple: keep learning, keep building, and make
+          useful and entertaining things for the web.
+        </p>
+
+        <div class="actions">
+          <button class="btn primary" data-view="projects" type="button">
+            Explore projects →
+          </button>
+          <button class="btn" data-view="contact" type="button">
+            Contact →
+          </button>
+        </div>
+      </div>
+
+      <div class="about-panel">
+        <div class="eyebrow">Interests</div>
+        <h3 style="margin-top:12px">Things I'm exploring</h3>
+        <p class="muted small">
+          A flexible collection of interests related to building
+          and experimenting with digital technology.
+        </p>
+
+        <div class="skill-list">
+          <span class="skill">HTML & CSS</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">Web design</span>
+          <span class="skill">Browser games</span>
+          <span class="skill">APIs</span>
+          <span class="skill">Creative coding</span>
+          <span class="skill">Technology</span>
+          <span class="skill">Learning</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="view" id="contact">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="eyebrow">Get in touch</div>
+      <h2 style="margin-top:12px">Let's talk.</h2>
+      <p>
+        Have a question, found a problem, or want to share an idea?
+        Send a message using the form.
+      </p>
+    </div>
+
+    <div class="contact-layout">
+
+      <div class="contact-info">
+        <div class="card-icon">✉</div>
+        <h3>Send a message</h3>
+        <p class="muted">
+          Use the contact form to send feedback, report an issue,
+          or suggest something you'd like to see on ScottCode.
+        </p>
+
+        <div class="notice">
+          Messages are submitted through Formspree.
+          Please don't include passwords or other sensitive information.
+        </div>
+      </div>
+
+      <form
+        class="contact-form"
+        id="contactForm"
+        action="https://formspree.io/f/xgaogqjo"
+        method="POST">
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="contactName">Your name</label>
+            <input
+              id="contactName"
+              name="name"
+              type="text"
+              placeholder="Enter your name"
+              maxlength="100"
+              required>
+          </div>
+
+          <div class="field">
+            <label for="contactEmail">Your email</label>
+            <input
+              id="contactEmail"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              maxlength="200"
+              required>
+          </div>
+
+          <div class="field full">
+            <label for="contactSubject">Subject</label>
+            <input
+              id="contactSubject"
+              name="subject"
+              type="text"
+              placeholder="What is your message about?"
+              maxlength="150"
+              required>
+          </div>
+
+          <div class="field full">
+            <label for="contactMessage">Message</label>
+            <textarea
+              id="contactMessage"
+              name="message"
+              placeholder="Write your message here..."
+              maxlength="5000"
+              required></textarea>
+          </div>
+
+        </div>
+
+        <input
+          type="hidden"
+          name="_next"
+          value="https://scottcode.fun/thanks/">
+
+        <div
+          class="notice hidden"
+          id="contactNotice"
+          aria-live="polite"></div>
+
+        <button class="btn primary" id="contactSubmit" type="submit">
+          Send message →
+        </button>
+
+        <p class="small muted">
+          By sending this form, you agree to submit the information
+          you've entered to the website's form service.
+        </p>
+
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- AUTHENTICATION -->
+<section class="view" id="auth">
+  <div class="container">
+
+    <div class="auth-layout">
+
+      <div class="auth-info">
+        <div class="eyebrow">ScottCode account</div>
+        <h2 style="margin-top:15px">
+          Your account.<br>
+          Your progress.
+        </h2>
+
+        <p class="muted">
+          Sign in to your account to access features that require
+          authentication and submit Arcade scores.
+        </p>
+
+        <div class="notice">
+          Your account uses the ScottCode backend. Your password
+          should never be stored directly in your browser.
+        </div>
+      </div>
+
+      <div class="auth-panel">
+
+        <div id="authForms">
+
+          <div class="tabs">
+            <button
+              class="tab active"
+              id="loginTab"
+              type="button">
+              Login
+            </button>
+
+            <button
+              class="tab"
+              id="registerTab"
+              type="button">
+              Create account
+            </button>
+          </div>
+
+          <form id="loginForm">
+
+            <h3>Welcome back</h3>
+            <p class="muted small">
+              Enter your account details to sign in.
+            </p>
+
+            <div class="field">
+              <label for="loginUsername">Username</label>
+              <input
+                id="loginUsername"
+                name="username"
+                type="text"
+                autocomplete="username"
+                maxlength="32"
+                required>
+            </div>
+
+            <div class="field">
+              <label for="loginPassword">Password</label>
+              <input
+                id="loginPassword"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required>
+            </div>
+
+            <div
+              class="notice hidden"
+              id="loginNotice"
+              aria-live="polite"></div>
+
+            <button
+              class="btn primary"
+              id="loginSubmit"
+              type="submit"
+              style="width:100%">
+              Login →
+            </button>
+
+          </form>
+
+          <form id="registerForm" class="hidden">
+
+            <h3>Create your account</h3>
+            <p class="muted small">
+              Choose a username and a secure password.
+            </p>
+
+            <div class="field">
+              <label for="registerUsername">Username</label>
+              <input
+                id="registerUsername"
+                name="username"
+                type="text"
+                autocomplete="username"
+                minlength="3"
+                maxlength="32"
+                pattern="[A-Za-z0-9_]+"
+                title="Use letters, numbers, and underscores."
+                required>
+            </div>
+
+            <div class="field">
+              <label for="registerPassword">Password</label>
+              <input
+                id="registerPassword"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+                required>
+              <p class="small muted">
+                Use at least 8 characters.
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="confirmPassword">Confirm password</label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+                required>
+            </div>
+
+            <div
+              class="notice hidden"
+              id="registerNotice"
+              aria-live="polite"></div>
+
+            <button
+              class="btn primary"
+              id="registerSubmit"
+              type="submit"
+              style="width:100%">
+              Create account →
+            </button>
+
+          </form>
+
+        </div>
+
+        <div id="accountPanel" class="hidden">
+
+          <div class="account-box">
+            <div class="eyebrow">Signed in</div>
+            <h3 style="margin-top:12px">
+              Welcome, <strong id="accountUsername">Player</strong>
+            </h3>
+            <p class="muted small">
+              Your ScottCode session is active.
+            </p>
+          </div>
+
+          <div
+            class="notice hidden"
+            id="accountNotice"
+            aria-live="polite"></div>
+
+          <div class="account-actions">
+            <button
+              class="btn primary"
+              data-view="arcade"
+              type="button">
+              Go to Arcade →
+            </button>
+
+            <button
+              class="btn danger"
+              id="logoutButton"
+              type="button">
+              Log out
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ARCADE -->
+<section class="view" id="arcade">
+  <div class="container">
+
+    <div class="arcade-top">
+
+      <div>
+        <div class="eyebrow">ScottCode Arcade</div>
+
+        <h2 style="margin-top:12px">
+          Play. Improve. Repeat.
+        </h2>
+
+        <p class="muted">
+          Four browser games, mobile-friendly controls,
+          and a leaderboard for high scores.
+        </p>
+      </div>
+
+      <div class="arcade-player">
+        <div class="arcade-player-icon">👤</div>
+        <div>
+          <div class="small muted">Current player</div>
+          <strong id="arcadePlayer">Guest</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GAME SELECTOR -->
+    <div class="game-selector" aria-label="Choose a game">
+
+      <button
+        class="game-choice selected"
+        type="button"
+        data-game="snake">
+
+        <span class="game-emoji">🐍</span>
+        <strong>Snake</strong>
+        <small>Eat, grow, survive.</small>
+      </button>
+
+      <button
+        class="game-choice"
+        type="button"
+        data-game="ttt">
+
+        <span class="game-emoji">⭕</span>
+        <strong>Tic-Tac-Toe</strong>
+        <small>Challenge the computer.</small>
+      </button>
+
+      <button
+        class="game-choice"
+        type="button"
+        data-game="memory">
+
+        <span class="game-emoji">🧠</span>
+        <strong>Memory Match</strong>
+        <small>Find all 8 pairs.</small>
+      </button>
+
+      <button
+        class="game-choice"
+        type="button"
+        data-game="clicker">
+
+        <span class="game-emoji">⚡</span>
+        <strong>Click Rush</strong>
+        <small>Tap fast for 10 seconds.</small>
+      </button>
+
+    </div>
+
+    <!-- GAME PANEL -->
+    <div class="game-panel">
+
+      <div class="game-panel-header">
+        <div>
+          <h3 id="gameTitle">🐍 Snake</h3>
+          <p id="gameDescription">
+            Eat the food and avoid the walls and yourself.
+          </p>
+        </div>
+
+        <button
+          class="btn"
+          id="restartGame"
+          type="button">
+          ↻ Restart game
+        </button>
+      </div>
+
+      <!-- SNAKE -->
+      <div id="snakeGame" class="game-content">
+
+        <div class="game-stage">
+
+          <canvas
+            id="snakeCanvas"
+            width="480"
+            height="480"
+            aria-label="Snake game board"></canvas>
+
+          <div class="score-line">
+            <span class="score-box">
+              Score: <strong id="snakeScore">0</strong>
+            </span>
+
+            <span class="score-box">
+              Personal best: <strong id="snakeBest">0</strong>
+            </span>
+
+            <span class="score-box">
+              <strong id="snakeState">Ready to play</strong>
+            </span>
+          </div>
+
+          <div class="game-controls">
+            <button
+              class="btn primary"
+              id="snakeStart"
+              type="button">
+              ▶ Start Snake
+            </button>
+
+            <button
+              class="btn"
+              id="snakePause"
+              type="button">
+              Ⅱ Pause
+            </button>
+          </div>
+
+          <div class="dpad" aria-label="Snake touch controls">
+            <button data-dir="up" type="button" aria-label="Up">↑</button>
+            <button data-dir="left" type="button" aria-label="Left">←</button>
+            <button data-dir="down" type="button" aria-label="Down">↓</button>
+            <button data-dir="right" type="button" aria-label="Right">→</button>
+          </div>
+
+          <p class="small muted">
+            Use the arrow keys, WASD, touch buttons, or swipe on the board.
+          </p>
+
+        </div>
+      </div>
+
+      <!-- TIC-TAC-TOE -->
+      <div id="tttGame" class="game-content hidden">
+
+        <div class="game-stage">
+
+          <div
+            class="ttt-board"
+            id="tttBoard"
+            aria-label="Tic-Tac-Toe board"></div>
+
+          <div class="score-line">
+            <span class="score-box">
+              You: <strong id="tttWins">0</strong>
+            </span>
+
+            <span class="score-box">
+              Computer: <strong id="tttLosses">0</strong>
+            </span>
+
+            <span class="score-box">
+              Draws: <strong id="tttDraws">0</strong>
+            </span>
+          </div>
+
+          <p class="game-status" id="tttStatus" aria-live="polite">
+            You're X. Choose a square to begin.
+          </p>
+
+          <div class="game-controls">
+            <button
+              class="btn primary"
+              id="tttRestart"
+              type="button">
+              ↻ New round
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MEMORY MATCH -->
+      <div id="memoryGame" class="game-content hidden">
+
+        <div class="game-stage">
+
+          <div
+            class="memory-board"
+            id="memoryBoard"
+            aria-label="Memory matching cards"></div>
+
+          <div class="score-line">
+            <span class="score-box">
+              Moves: <strong id="memoryMoves">0</strong>
+            </span>
+
+            <span class="score-box">
+              Pairs: <strong id="memoryPairs">0</strong>/8
+            </span>
+
+            <span class="score-box">
+              Score: <strong id="memoryScore">0</strong>
+            </span>
+          </div>
+
+          <p class="game-status" id="memoryStatus" aria-live="polite">
+            Flip two cards and find matching pairs.
+          </p>
+
+          <div class="game-controls">
+            <button
+              class="btn primary"
+              id="memoryRestart"
+              type="button">
+              ↻ Shuffle cards
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CLICK RUSH -->
+      <div id="clickerGame" class="game-content hidden">
+
+        <div class="game-stage clicker-card">
+
+          <div class="score-line">
+            <span class="score-box">
+              Clicks: <strong id="clickerScore">0</strong>
+            </span>
+
+            <span class="score-box">
+              Time: <strong id="clickerTime">10</strong>s
+            </span>
+
+            <span class="score-box">
+              Best: <strong id="clickerBest">0</strong>
+            </span>
+          </div>
+
+          <button
+            class="click-target"
+            id="clickTarget"
+            type="button"
+            disabled>
+            READY?
+          </button>
+
+          <p
+            class="small muted"
+            id="clickerHint">
+            Press Start, then tap the circle as quickly as you can for 10 seconds.
+          </p>
+
+          <div class="game-controls">
+            <button
+              class="btn primary"
+              id="clickerStart"
+              type="button">
+              ▶ Start 10 seconds
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <div
+        class="game-status"
+        id="gameStatus"
+        aria-live="polite">
+        Snake ready. Press Start to play.
+      </div>
+
+    </div>
+
+    <!-- ONLINE LEADERBOARD -->
+    <div class="leaderboard">
+
+      <div class="leaderboard-head">
+        <div>
+          <h3>🏆 Online leaderboard</h3>
+          <p
+            class="muted small"
+            id="leaderboardGameName"
+            style="margin:4px 0 0">
+            Snake rankings
+          </p>
+        </div>
+
+        <button
+          class="btn soft"
+          id="refreshLeaderboard"
+          type="button">
+          ↻ Refresh scores
+        </button>
+      </div>
+
+      <div
+        class="leaderboard-list"
+        id="leaderboardList">
+
+        <div class="muted small">
+          Leaderboard will load when the game system starts.
+        </div>
+
+      </div>
+
+      <p
+        class="game-note"
+        id="leaderboardNote">
+        Sign in to submit scores. Online rankings require the Worker
+        to support the score API.
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- THANK YOU PAGE VIEW -->
+<section class="view" id="thanks">
+  <div class="container">
+    <div class="about-panel" style="max-width:650px;margin:25px auto;text-align:center">
+      <div class="card-icon" style="margin:0 auto 18px">✓</div>
+      <div class="eyebrow">Message sent</div>
+      <h2 style="margin-top:12px">Thanks for reaching out.</h2>
+      <p class="muted">
+        Your message has been submitted. You can return to the home page.
+      </p>
+      <button class="btn primary" data-view="home" type="button">
+        ← Back to Home
+      </button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© <span id="footerYear">2026</span> ScottCode.fun</span>
+    <span>Built with curiosity and code.</span>
+    <button
+      class="btn soft"
+      data-view="home"
+      type="button"
+      style="padding:8px 12px">
+      Back to top ↑
+    </button>
+  </div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- PART 3 WILL ADD THE JAVASCRIPT HERE -->
   <script>
-    // Mobile navigation menu
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+"use strict";
 
-    menuToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
+/* ==========================================
+   ScottCode.fun — Main JavaScript
+   API: Cloudflare Worker
+   ========================================== */
 
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.textContent = isOpen ? "✕" : "☰";
-    });
+const CONFIG = {
+  API_BASE: "https://scottcode-api1.getlost24543.workers.dev",
+  REGISTER_PATH: "/register",
+  LOGIN_PATH: "/login",
+  ME_PATH: "/me",
+  LOGOUT_PATH: "/logout",
+  SCORES_PATH: "/api/scores",
+  FORMSPREE_URL: "https://formspree.io/f/xgaogqjo"
+};
 
-    // Close the mobile menu after selecting a link
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰";
-      });
-    });
+const $ = id => document.getElementById(id);
 
-    // Reveal sections when they enter the screen
-    const revealItems = document.querySelectorAll(".reveal");
+const STORAGE = {
+  token: "scottcode_token",
+  username: "scottcode_username",
+  snakeBest: "scottcode_snake_best",
+  clickerBest: "scottcode_clicker_best"
+};
 
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
+let currentUser = localStorage.getItem(STORAGE.username) || "";
+let currentToken = localStorage.getItem(STORAGE.token) || "";
+let currentView = "home";
+let currentGame = "snake";
+let toastTimer = null;
 
-      revealItems.forEach(item => observer.observe(item));
-    } else {
-      revealItems.forEach(item => item.classList.add("visible"));
+/* ==========================================
+   GENERAL HELPERS
+   ========================================== */
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function showToast(message, duration = 3000) {
+  const toast = $("toast");
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, duration);
+}
+
+function setNotice(id, message, type = "") {
+  const element = $(id);
+  if (!element) return;
+
+  element.textContent = message;
+  element.classList.remove("success", "error");
+
+  if (type) element.classList.add(type);
+}
+
+function formatError(error) {
+  const message = String(error?.message || error || "Something went wrong.");
+
+  if (/failed to fetch|networkerror|load failed/i.test(message)) {
+    return "Cannot connect to the API. Check the Worker URL, CORS settings, and internet connection.";
+  }
+
+  return message;
+}
+
+async function apiRequest(path, options = {}) {
+  const headers = {
+    "Accept": "application/json",
+    ...(options.headers || {})
+  };
+
+  if (options.body && !headers["Content-Type"]) {
+    headers["Content-Type"] = "application/json";
+  }
+
+  if (currentToken) {
+    headers["Authorization"] = "Bearer " + currentToken;
+  }
+
+  const response = await fetch(
+    CONFIG.API_BASE.replace(/\/+$/, "") + path,
+    {
+      ...options,
+      headers,
+      credentials: "omit"
+    }
+  );
+
+  const raw = await response.text();
+  let data = {};
+
+  try {
+    data = raw ? JSON.parse(raw) : {};
+  } catch {
+    data = { message: raw };
+  }
+
+  if (!response.ok || data.success === false || data.error) {
+    throw new Error(
+      data.message ||
+      data.error ||
+      `Request failed (${response.status}).`
+    );
+  }
+
+  return data;
+}
+
+function getReturnedToken(data) {
+  return data?.token ||
+    data?.data?.token ||
+    data?.accessToken ||
+    data?.data?.accessToken ||
+    "";
+}
+
+function getReturnedUsername(data, fallback = "") {
+  return data?.user?.username ||
+    data?.data?.user?.username ||
+    data?.username ||
+    data?.data?.username ||
+    fallback;
+}
+
+function saveLogin(username, token) {
+  currentUser = username;
+  currentToken = token || "";
+
+  if (currentUser) {
+    localStorage.setItem(STORAGE.username, currentUser);
+  }
+
+  if (currentToken) {
+    localStorage.setItem(STORAGE.token, currentToken);
+  }
+
+  updateAuthUI();
+}
+
+function clearLogin() {
+  currentUser = "";
+  currentToken = "";
+
+  localStorage.removeItem(STORAGE.username);
+  localStorage.removeItem(STORAGE.token);
+
+  updateAuthUI();
+}
+
+function updateAuthUI() {
+  const loggedIn = Boolean(currentToken && currentUser);
+
+  if ($("authForms")) {
+    $("authForms").hidden = loggedIn;
+  }
+
+  if ($("accountPanel")) {
+    $("accountPanel").hidden = !loggedIn;
+  }
+
+  if ($("accountUsername")) {
+    $("accountUsername").textContent = currentUser || "Guest";
+  }
+
+  if ($("arcadePlayer")) {
+    $("arcadePlayer").textContent = loggedIn
+      ? "Playing as " + currentUser
+      : "Playing as Guest";
+  }
+
+  if ($("accountNav")) {
+    $("accountNav").textContent = loggedIn ? "Account" : "Login";
+  }
+
+  if ($("leaderboardNote")) {
+    $("leaderboardNote").textContent = loggedIn
+      ? "Scores may be submitted using your account."
+      : "Log in to submit scores. Guest scores stay on this device.";
+  }
+}
+
+/* ==========================================
+   NAVIGATION
+   ========================================== */
+
+const VALID_VIEWS = [
+  "home",
+  "projects",
+  "about",
+  "contact",
+  "auth",
+  "arcade",
+  "thanks"
+];
+
+function showView(viewId, updateHash = true) {
+  if (!VALID_VIEWS.includes(viewId)) viewId = "home";
+
+  currentView = viewId;
+
+  document.querySelectorAll(".view").forEach(view => {
+    view.classList.toggle("active", view.id === viewId);
+  });
+
+  document.querySelectorAll("[data-view]").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.view === viewId
+    );
+  });
+
+  const nav = document.querySelector(".nav-links");
+  if (nav) nav.classList.remove("open");
+
+  const menuButton = $("menuToggle");
+  if (menuButton) {
+    menuButton.setAttribute("aria-expanded", "false");
+  }
+
+  if (updateHash && location.hash !== "#" + viewId) {
+    history.replaceState(null, "", "#" + viewId);
+  }
+
+  if (viewId === "arcade") {
+    updateAuthUI();
+    loadLeaderboard();
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.querySelectorAll("[data-view]").forEach(button => {
+  button.addEventListener("click", () => {
+    showView(button.dataset.view);
+  });
+});
+
+if ($("menuToggle")) {
+  $("menuToggle").addEventListener("click", () => {
+    const nav = document.querySelector(".nav-links");
+    if (!nav) return;
+
+    const isOpen = nav.classList.toggle("open");
+    $("menuToggle").setAttribute("aria-expanded", String(isOpen));
+  });
+}
+
+window.addEventListener("hashchange", () => {
+  const requested = location.hash.slice(1);
+  if (VALID_VIEWS.includes(requested)) {
+    showView(requested, false);
+  }
+});
+
+/* ==========================================
+   LOGIN AND REGISTRATION
+   ========================================== */
+
+function showAuthTab(tab) {
+  const isLogin = tab === "login";
+
+  if ($("loginForm")) $("loginForm").hidden = !isLogin;
+  if ($("registerForm")) $("registerForm").hidden = isLogin;
+
+  if ($("loginTab")) $("loginTab").classList.toggle("active", isLogin);
+  if ($("registerTab")) $("registerTab").classList.toggle("active", !isLogin);
+
+  setNotice("loginNotice", "");
+  setNotice("registerNotice", "");
+}
+
+if ($("loginTab")) {
+  $("loginTab").addEventListener("click", () => showAuthTab("login"));
+}
+
+if ($("registerTab")) {
+  $("registerTab").addEventListener("click", () => showAuthTab("register"));
+}
+
+function setButtonBusy(button, busy, busyText = "Please wait...") {
+  if (!button) return;
+
+  if (busy) {
+    button.dataset.originalText = button.textContent;
+    button.disabled = true;
+    button.textContent = busyText;
+  } else {
+    button.disabled = false;
+    button.textContent = button.dataset.originalText || "Submit";
+  }
+}
+
+if ($("registerForm")) {
+  $("registerForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const username = $("registerUsername").value.trim();
+    const password = $("registerPassword").value;
+    const confirm = $("confirmPassword").value;
+    const button = $("registerSubmit");
+
+    if (username.length < 3) {
+      setNotice("registerNotice", "Username must be at least 3 characters.", "error");
+      return;
     }
 
-    // Automatically display the current year
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+    if (password.length < 8) {
+      setNotice("registerNotice", "Password must be at least 8 characters.", "error");
+      return;
+    }
 
+    if (password !== confirm) {
+      setNotice("registerNotice", "Passwords do not match.", "error");
+      return;
+    }
+
+    setButtonBusy(button, true, "Creating account...");
+    setNotice("registerNotice", "Creating your account...");
+
+    try {
+      const data = await apiRequest(CONFIG.REGISTER_PATH, {
+        method: "POST",
+        body: JSON.stringify({ username, password })
+      });
+
+      const token = getReturnedToken(data);
+      const returnedUsername = getReturnedUsername(data, username);
+
+      if (token) {
+        saveLogin(returnedUsername, token);
+        setNotice("registerNotice", "Account created successfully!", "success");
+        showToast("Welcome, " + returnedUsername + "!");
+        showView("arcade");
+      } else {
+        setNotice(
+          "registerNotice",
+          data.message || "Account created! Please log in.",
+          "success"
+        );
+
+        $("loginUsername").value = username;
+        $("loginPassword").value = "";
+        showAuthTab("login");
+        setNotice("loginNotice", "Account created. Log in with your new account.", "success");
+      }
+    } catch (error) {
+      setNotice("registerNotice", formatError(error), "error");
+    } finally {
+      setButtonBusy(button, false);
+    }
+  });
+}
+
+if ($("loginForm")) {
+  $("loginForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const username = $("loginUsername").value.trim();
+    const password = $("loginPassword").value;
+    const button = $("loginSubmit");
+
+    if (!username || !password) {
+      setNotice("loginNotice", "Enter your username and password.", "error");
+      return;
+    }
+
+    setButtonBusy(button, true, "Logging in...");
+    setNotice("loginNotice", "Connecting to your account...");
+
+    try {
+      const data = await apiRequest(CONFIG.LOGIN_PATH, {
+        method: "POST",
+        body: JSON.stringify({ username, password })
+      });
+
+      const token = getReturnedToken(data);
+      const returnedUsername = getReturnedUsername(data, username);
+
+      if (!token) {
+        throw new Error("Login succeeded, but the API did not return a token. Check the Worker login response.");
+      }
+
+      saveLogin(returnedUsername, token);
+
+      setNotice("loginNotice", "Login successful!", "success");
+      showToast("Welcome back, " + returnedUsername + "!");
+      showView("arcade");
+    } catch (error) {
+      setNotice("loginNotice", formatError(error), "error");
+    } finally {
+      setButtonBusy(button, false);
+    }
+  });
+}
+
+if ($("logoutButton")) {
+  $("logoutButton").addEventListener("click", async () => {
+    const token = currentToken;
+
+    clearLogin();
+    showAuthTab("login");
+    showToast("You have logged out.");
+
+    // Optional server-side logout. Local logout still works if this route
+    // does not exist on the Worker.
+    if (token) {
+      try {
+        await fetch(CONFIG.API_BASE + CONFIG.LOGOUT_PATH, {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer " + token,
+            "Accept": "application/json"
+          },
+          credentials: "omit"
+        });
+      } catch {
+        // Local session has already been cleared.
+      }
+    }
+
+    showView("home");
+  });
+}
+
+/* ==========================================
+   CONTACT FORM
+   Leave native Formspree submission enabled
+   so its redirect can work.
+   ========================================== */
+
+if ($("contactForm")) {
+  $("contactForm").addEventListener("submit", () => {
+    const button = $("contactSubmit");
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Sending...";
+    }
+
+    setNotice("contactNotice", "Sending your message...");
+  });
+}
+
+/* ==========================================
+   ARCADE: GAME SELECTION
+   ========================================== */
+
+const GAME_INFO = {
+  snake: {
+    title: "Snake",
+    description: "Eat the glowing food, grow longer, and avoid crashing."
+  },
+  ttt: {
+    title: "Tic-Tac-Toe",
+    description: "Play X against the computer. Try to win or force a draw."
+  },
+  memory: {
+    title: "Memory Match",
+    description: "Flip cards and find every matching pair."
+  },
+  clicker: {
+    title: "Click Rush",
+    description: "Click the target as many times as possible in 10 seconds."
+  }
+};
+
+function showGame(gameId, reset = true) {
+  if (!GAME_INFO[gameId]) return;
+
+  if (currentGame !== gameId || reset) {
+    stopSnakeLoop();
+    stopClickerTimer();
+  }
+
+  currentGame = gameId;
+
+  document.querySelectorAll("[data-game]").forEach(button => {
+    button.classList.toggle("active", button.dataset.game === gameId);
+  });
+
+  ["snake", "ttt", "memory", "clicker"].forEach(id => {
+    const panel = $(id + "Game");
+    if (panel) panel.hidden = id !== gameId;
+  });
+
+  if ($("gameTitle")) $("gameTitle").textContent = GAME_INFO[gameId].title;
+  if ($("gameDescription")) $("gameDescription").textContent = GAME_INFO[gameId].description;
+  if ($("leaderboardGameName")) $("leaderboardGameName").textContent = GAME_INFO[gameId].title;
+  if ($("gameStatus")) $("gameStatus").textContent = "Ready to play.";
+
+  if (reset) {
+    if (gameId === "snake") resetSnake();
+    if (gameId === "ttt") resetTTT();
+    if (gameId === "memory") resetMemory();
+    if (gameId === "clicker") resetClicker();
+  }
+
+  loadLeaderboard();
+}
+
+document.querySelectorAll("[data-game]").forEach(button => {
+  button.addEventListener("click", () => showGame(button.dataset.game));
+});
+
+if ($("restartGame")) {
+  $("restartGame").addEventListener("click", () => showGame(currentGame));
+}
+
+/* ==========================================
+   LEADERBOARD
+   Requires GET and POST /api/scores routes
+   on the Worker. Games still work without it.
+   ========================================== */
+
+function getScoreRows(data) {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data.scores)) return data.scores;
+  if (Array.isArray(data.leaderboard)) return data.leaderboard;
+  if (Array.isArray(data.data?.scores)) return data.data.scores;
+  if (Array.isArray(data.data?.leaderboard)) return data.data.leaderboard;
+  return [];
+}
+
+async function submitScore(gameId, score) {
+  if (!currentToken || !currentUser || score <= 0) return;
+
+  try {
+    await apiRequest(CONFIG.SCORES_PATH, {
+      method: "POST",
+      body: JSON.stringify({
+        gameId,
+        score
+      })
+    });
+
+    if (currentGame === gameId) loadLeaderboard();
+  } catch (error) {
+    console.warn("Score submission unavailable:", error.message);
+  }
+}
+
+async function loadLeaderboard() {
+  const list = $("leaderboardList");
+  if (!list) return;
+
+  const gameId = currentGame;
+
+  list.replaceChildren();
+
+  const loading = document.createElement("li");
+  loading.textContent = "Loading leaderboard...";
+  list.appendChild(loading);
+
+  try {
+    const data = await apiRequest(
+      CONFIG.SCORES_PATH + "?gameId=" + encodeURIComponent(gameId),
+      { method: "GET" }
+    );
+
+    if (gameId !== currentGame) return;
+
+    const rows = getScoreRows(data)
+      .map(row => ({
+        username: row.username || row.user?.username || "Player",
+        score: Number(row.score ?? row.points ?? 0)
+      }))
+      .filter(row => Number.isFinite(row.score))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 10);
+
+    list.replaceChildren();
+
+    if (!rows.length) {
+      const empty = document.createElement("li");
+      empty.textContent = "No scores yet. Be the first!";
+      list.appendChild(empty);
+      return;
+    }
+
+    rows.forEach((row, index) => {
+      const item = document.createElement("li");
+      const name = document.createElement("span");
+      const score = document.createElement("strong");
+
+      name.textContent = `${index + 1}. ${row.username}`;
+      score.textContent = String(row.score);
+
+      item.append(name, score);
+      list.appendChild(item);
+    });
+  } catch (error) {
+    if (gameId !== currentGame) return;
+
+    list.replaceChildren();
+
+    const item = document.createElement("li");
+    item.textContent = "Online leaderboard isn't available yet.";
+    list.appendChild(item);
+
+    if ($("leaderboardNote")) {
+      $("leaderboardNote").textContent =
+        "The games work locally. The Worker needs a working GET /api/scores route for online rankings.";
+    }
+
+    console.warn("Leaderboard unavailable:", error.message);
+  }
+}
+
+if ($("refreshLeaderboard")) {
+  $("refreshLeaderboard").addEventListener("click", loadLeaderboard);
+}
+
+/* ==========================================
+   GAME 1: SNAKE
+   ========================================== */
+
+const snake = {
+  canvas: $("snakeCanvas"),
+  ctx: $("snakeCanvas")?.getContext("2d"),
+  size: 20,
+  cells: 24,
+  body: [],
+  food: { x: 12, y: 12 },
+  direction: { x: 1, y: 0 },
+  nextDirection: { x: 1, y: 0 },
+  score: 0,
+  timer: null,
+  running: false,
+  over: false
+};
+
+function snakeBest() {
+  return Number(localStorage.getItem(STORAGE.snakeBest) || 0);
+}
+
+function updateSnakeLabels() {
+  if ($("snakeScore")) $("snakeScore").textContent = String(snake.score);
+  if ($("snakeBest")) $("snakeBest").textContent = String(snakeBest());
+}
+
+function randomSnakeFood() {
+  let candidate;
+
+  do {
+    candidate = {
+      x: Math.floor(Math.random() * snake.cells),
+      y: Math.floor(Math.random() * snake.cells)
+    };
+  } while (snake.body.some(part =>
+    part.x === candidate.x && part.y === candidate.y
+  ));
+
+  snake.food = candidate;
+}
+
+function resetSnake() {
+  stopSnakeLoop();
+
+  snake.body = [
+    { x: 7, y: 12 },
+    { x: 6, y: 12 },
+    { x: 5, y: 12 }
+  ];
+
+  snake.direction = { x: 1, y: 0 };
+  snake.nextDirection = { x: 1, y: 0 };
+  snake.score = 0;
+  snake.running = false;
+  snake.over = false;
+
+  randomSnakeFood();
+  updateSnakeLabels();
+  drawSnake();
+
+  if ($("snakeState")) $("snakeState").textContent = "Ready";
+  if ($("gameStatus")) $("gameStatus").textContent = "Press Start to play Snake.";
+}
+
+function drawSnake() {
+  if (!snake.ctx || !snake.canvas) return;
+
+  const ctx = snake.ctx;
+  const width = snake.canvas.width;
+  const height = snake.canvas.height;
+  const cell = width / snake.cells;
+
+  ctx.clearRect(0, 0, width, height);
+
+  ctx.fillStyle = "#eaf5ff";
+  ctx.fillRect(0, 0, width, height);
+
+  ctx.strokeStyle = "rgba(75,140,210,.12)";
+  ctx.lineWidth = 1;
+
+  for (let i = 0; i <= snake.cells; i++) {
+    ctx.beginPath();
+    ctx.moveTo(i * cell, 0);
+    ctx.lineTo(i * cell, height);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(0, i * cell);
+    ctx.lineTo(width, i * cell);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = "#ff6b8a";
+  ctx.beginPath();
+  ctx.arc(
+    snake.food.x * cell + cell / 2,
+    snake.food.y * cell + cell / 2,
+    cell * 0.38,
+    0,
+    Math.PI * 2
+  );
+  ctx.fill();
+
+  snake.body.forEach((part, index) => {
+    ctx.fillStyle = index === 0 ? "#1768d8" : "#55a5ff";
+
+    const gap = 2;
+    ctx.beginPath();
+    ctx.roundRect(
+      part.x * cell + gap,
+      part.y * cell + gap,
+      cell - gap * 2,
+      cell - gap * 2,
+      5
+    );
+    ctx.fill();
+  });
+
+  if (!snake.running && !snake.over) {
+    ctx.fillStyle = "rgba(10,40,80,.65)";
+    ctx.font = "bold 20px system-ui";
+    ctx.textAlign = "center";
+    ctx.fillText("Press START", width / 2, height / 2);
+  }
+}
+
+function startSnake() {
+  if (snake.over) resetSnake();
+  if (snake.running) return;
+
+  snake.running = true;
+
+  if ($("snakeState")) $("snakeState").textContent = "Playing";
+  if ($("gameStatus")) $("gameStatus").textContent = "Snake is running!";
+
+  snake.timer = setInterval(tickSnake, 125);
+  drawSnake();
+}
+
+function stopSnakeLoop() {
+  if (snake.timer) clearInterval(snake.timer);
+  snake.timer = null;
+  snake.running = false;
+}
+
+function pauseSnake() {
+  if (!snake.running) return;
+
+  stopSnakeLoop();
+
+  if ($("snakeState")) $("snakeState").textContent = "Paused";
+  if ($("gameStatus")) $("gameStatus").textContent = "Snake paused.";
+  drawSnake();
+}
+
+function tickSnake() {
+  snake.direction = { ...snake.nextDirection };
+
+  const head = {
+    x: snake.body[0].x + snake.direction.x,
+    y: snake.body[0].y + snake.direction.y
+  };
+
+  const ateFood = head.x === snake.food.x && head.y === snake.food.y;
+
+  const collisionBody = ateFood
+    ? snake.body
+    : snake.body.slice(0, -1);
+
+  if (
+    head.x < 0 ||
+    head.y < 0 ||
+    head.x >= snake.cells ||
+    head.y >= snake.cells ||
+    collisionBody.some(part => part.x === head.x && part.y === head.y)
+  ) {
+    endSnake();
+    return;
+  }
+
+  snake.body.unshift(head);
+
+  if (ateFood) {
+    snake.score += 10;
+    randomSnakeFood();
+    updateSnakeLabels();
+  } else {
+    snake.body.pop();
+  }
+
+  drawSnake();
+}
+
+function endSnake() {
+  stopSnakeLoop();
+  snake.over = true;
+
+  const previousBest = snakeBest();
+  const best = Math.max(previousBest, snake.score);
+
+  localStorage.setItem(STORAGE.snakeBest, String(best));
+  updateSnakeLabels();
+
+  if ($("snakeState")) $("snakeState").textContent = "Game over";
+  if ($("gameStatus")) {
+    $("gameStatus").textContent = `Game over! Score: ${snake.score}.`;
+  }
+
+  drawSnake();
+  submitScore("snake", snake.score);
+  showToast("Snake game over — score: " + snake.score);
+}
+
+function setSnakeDirection(direction) {
+  const directions = {
+    up: { x: 0, y: -1 },
+    down: { x: 0, y: 1 },
+    left: { x: -1, y: 0 },
+    right: { x: 1, y: 0 }
+  };
+
+  const next = directions[direction];
+  if (!next) return;
+
+  if (
+    next.x === -snake.direction.x &&
+    next.y === -snake.direction.y
+  ) return;
+
+  snake.nextDirection = next;
+}
+
+if ($("snakeStart")) {
+  $("snakeStart").addEventListener("click", startSnake);
+}
+
+if ($("snakePause")) {
+  $("snakePause").addEventListener("click", pauseSnake);
+}
+
+document.querySelectorAll("[data-dir]").forEach(button => {
+  button.addEventListener("click", () => {
+    setSnakeDirection(button.dataset.dir);
+  });
+});
+
+document.addEventListener("keydown", event => {
+  const activeTag = document.activeElement?.tagName;
+
+  if (["INPUT", "TEXTAREA", "SELECT"].includes(activeTag)) return;
+  if (currentView !== "arcade" || currentGame !== "snake") return;
+
+  const keyMap = {
+    ArrowUp: "up",
+    w: "up",
+    W: "up",
+    ArrowDown: "down",
+    s: "down",
+    S: "down",
+    ArrowLeft: "left",
+    a: "left",
+    A: "left",
+    ArrowRight: "right",
+    d: "right",
+    D: "right"
+  };
+
+  if (keyMap[event.key]) {
+    event.preventDefault();
+    setSnakeDirection(keyMap[event.key]);
+  }
+});
+
+if (snake.canvas) {
+  let touchX = 0;
+  let touchY = 0;
+
+  snake.canvas.addEventListener("touchstart", event => {
+    const touch = event.changedTouches[0];
+    touchX = touch.clientX;
+    touchY = touch.clientY;
+  }, { passive: true });
+
+  snake.canvas.addEventListener("touchend", event => {
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - touchX;
+    const dy = touch.clientY - touchY;
+
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      setSnakeDirection(dx > 0 ? "right" : "left");
+    } else {
+      setSnakeDirection(dy > 0 ? "down" : "up");
+    }
+  }, { passive: true });
+}
+
+/* ==========================================
+   GAME 2: TIC-TAC-TOE
+   ========================================== */
+
+let tttBoard = Array(9).fill("");
+let tttLocked = false;
+let tttStats = { wins: 0, losses: 0, draws: 0 };
+
+function resetTTT() {
+  tttBoard = Array(9).fill("");
+  tttLocked = false;
+  renderTTT();
+
+  if ($("tttStatus")) $("tttStatus").textContent = "Your turn — you are X.";
+  if ($("gameStatus")) $("gameStatus").textContent = "Your turn in Tic-Tac-Toe.";
+}
+
+function renderTTT() {
+  const board = $("tttBoard");
+  if (!board) return;
+
+  board.replaceChildren();
+
+  tttBoard.forEach((value, index) => {
+    const cell = document.createElement("button");
+    cell.type = "button";
+    cell.className = "ttt-cell";
+    cell.textContent = value;
+    cell.setAttribute("aria-label", `Cell ${index + 1}: ${value || "empty"}`);
+    cell.disabled = Boolean(value) || tttLocked;
+    cell.addEventListener("click", () => playTTT(index));
+    board.appendChild(cell);
+  });
+
+  if ($("tttWins")) $("tttWins").textContent = String(tttStats.wins);
+  if ($("tttLosses")) $("tttLosses").textContent = String(tttStats.losses);
+  if ($("tttDraws")) $("tttDraws").textContent = String(tttStats.draws);
+}
+
+function getTTTWinner(board) {
+  const lines = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
+  ];
+
+  for (const [a, b, c] of lines) {
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return board[a];
+    }
+  }
+
+  return board.every(Boolean) ? "draw" : "";
+}
+
+function findWinningMove(mark) {
+  for (let i = 0; i < 9; i++) {
+    if (tttBoard[i]) continue;
+
+    const copy = [...tttBoard];
+    copy[i] = mark;
+
+    if (getTTTWinner(copy) === mark) return i;
+  }
+
+  return -1;
+}
+
+function computerTTTMove() {
+  let move = findWinningMove("O");
+
+  if (move < 0) move = findWinningMove("X");
+
+  if (move < 0 && !tttBoard[4]) move = 4;
+
+  if (move < 0) {
+    const corners = [0, 2, 6, 8].filter(i => !tttBoard[i]);
+    if (corners.length) {
+      move = corners[Math.floor(Math.random() * corners.length)];
+    }
+  }
+
+  if (move < 0) {
+    const available = tttBoard
+      .map((value, index) => value ? -1 : index)
+      .filter(index => index >= 0);
+
+    if (available.length) {
+      move = available[Math.floor(Math.random() * available.length)];
+    }
+  }
+
+  if (move >= 0) tttBoard[move] = "O";
+}
+
+function finishTTT(winner) {
+  tttLocked = true;
+
+  if (winner === "X") {
+    tttStats.wins++;
+    if ($("tttStatus")) $("tttStatus").textContent = "You win!";
+    if ($("gameStatus")) $("gameStatus").textContent = "You won Tic-Tac-Toe!";
+    submitScore("ttt", 3);
+    showToast("You won!");
+  } else if (winner === "O") {
+    tttStats.losses++;
+    if ($("tttStatus")) $("tttStatus").textContent = "Computer wins.";
+    if ($("gameStatus")) $("gameStatus").textContent = "Computer won this round.";
+  } else {
+    tttStats.draws++;
+    if ($("tttStatus")) $("tttStatus").textContent = "It's a draw!";
+    if ($("gameStatus")) $("gameStatus").textContent = "Tic-Tac-Toe ended in a draw.";
+    submitScore("ttt", 1);
+  }
+
+  renderTTT();
+}
+
+function playTTT(index) {
+  if (tttLocked || tttBoard[index]) return;
+
+  tttBoard[index] = "X";
+
+  let winner = getTTTWinner(tttBoard);
+
+  if (winner) {
+    renderTTT();
+    finishTTT(winner);
+    return;
+  }
+
+  if (tttBoard.every(Boolean)) {
+    renderTTT();
+    finishTTT("draw");
+    return;
+  }
+
+  tttLocked = true;
+  renderTTT();
+
+  setTimeout(() => {
+    computerTTTMove();
+    winner = getTTTWinner(tttBoard);
+
+    if (winner) {
+      renderTTT();
+      finishTTT(winner);
+      return;
+    }
+
+    if (tttBoard.every(Boolean)) {
+      renderTTT();
+      finishTTT("draw");
+      return;
+    }
+
+    tttLocked = false;
+    renderTTT();
+
+    if ($("tttStatus")) $("tttStatus").textContent = "Your turn — you are X.";
+  }, 300);
+}
+
+if ($("tttRestart")) {
+  $("tttRestart").addEventListener("click", resetTTT);
+}
+
+/* ==========================================
+   GAME 3: MEMORY MATCH
+   ========================================== */
+
+const MEMORY_SYMBOLS = [
+  "🚀", "🎮", "💎", "⚡",
+  "🌙", "🪐", "🎧", "🧩"
+];
+
+let memoryCards = [];
+let memoryFirst = null;
+let memoryBusy = false;
+let memoryMoves = 0;
+let memoryPairs = 0;
+let memoryPoints = 1000;
+let memoryTimeout = null;
+
+function resetMemory() {
+  clearTimeout(memoryTimeout);
+
+  memoryCards = [...MEMORY_SYMBOLS, ...MEMORY_SYMBOLS]
+    .map((symbol, id) => ({ symbol, id, matched: false, open: false }))
+    .sort(() => Math.random() - 0.5);
+
+  memoryFirst = null;
+  memoryBusy = false;
+  memoryMoves = 0;
+  memoryPairs = 0;
+  memoryPoints = 1000;
+
+  updateMemoryLabels();
+  renderMemory();
+
+  if ($("memoryStatus")) $("memoryStatus").textContent = "Find all 8 pairs.";
+  if ($("gameStatus")) $("gameStatus").textContent = "Memory Match is ready.";
+}
+
+function updateMemoryLabels() {
+  if ($("memoryMoves")) $("memoryMoves").textContent = String(memoryMoves);
+  if ($("memoryPairs")) $("memoryPairs").textContent = `${memoryPairs}/8`;
+  if ($("memoryScore")) $("memoryScore").textContent = String(memoryPoints);
+}
+
+function renderMemory() {
+  const board = $("memoryBoard");
+  if (!board) return;
+
+  board.replaceChildren();
+
+  memoryCards.forEach((card, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "memory-card";
+
+    if (card.open || card.matched) button.classList.add("flipped");
+    if (card.matched) button.classList.add("matched");
+
+    button.textContent = card.open || card.matched ? card.symbol : "?";
+    button.disabled = card.matched || memoryBusy;
+
+    button.setAttribute(
+      "aria-label",
+      card.open || card.matched ? card.symbol : "Hidden card"
+    );
+
+    button.addEventListener("click", () => flipMemoryCard(index));
+    board.appendChild(button);
+  });
+}
+
+function flipMemoryCard(index) {
+  const card = memoryCards[index];
+
+  if (!card || card.matched || card.open || memoryBusy) return;
+
+  card.open = true;
+
+  if (memoryFirst === null) {
+    memoryFirst = index;
+    renderMemory();
+    return;
+  }
+
+  memoryMoves++;
+  const firstIndex = memoryFirst;
+  const firstCard = memoryCards[firstIndex];
+  memoryFirst = null;
+
+  if (firstCard.symbol === card.symbol) {
+    firstCard.matched = true;
+    card.matched = true;
+    memoryPairs++;
+    memoryPoints = Math.max(0, 1000 - memoryMoves * 20);
+
+    updateMemoryLabels();
+    renderMemory();
+
+    if (memoryPairs === 8) {
+      if ($("memoryStatus")) $("memoryStatus").textContent =
+        `Completed in ${memoryMoves} moves!`;
+
+      if ($("gameStatus")) $("gameStatus").textContent =
+        `Memory Match complete! Score: ${memoryPoints}.`;
+
+      submitScore("memory", memoryPoints);
+      showToast("All pairs found!");
+    } else if ($("memoryStatus")) {
+      $("memoryStatus").textContent = "Match found!";
+    }
+
+    return;
+  }
+
+  memoryBusy = true;
+  updateMemoryLabels();
+  renderMemory();
+
+  memoryTimeout = setTimeout(() => {
+    firstCard.open = false;
+    card.open = false;
+    memoryBusy = false;
+
+    updateMemoryLabels();
+    renderMemory();
+
+    if ($("memoryStatus")) $("memoryStatus").textContent = "Keep looking!";
+  }, 750);
+}
+
+if ($("memoryRestart")) {
+  $("memoryRestart").addEventListener("click", resetMemory);
+}
+
+/* ==========================================
+   GAME 4: CLICK RUSH
+   ========================================== */
+
+let clickerScore = 0;
+let clickerTimeLeft = 10;
+let clickerInterval = null;
+let clickerRunning = false;
+
+function clickerBest() {
+  return Number(localStorage.getItem(STORAGE.clickerBest) || 0);
+}
+
+function updateClickerLabels() {
+  if ($("clickerScore")) $("clickerScore").textContent = String(clickerScore);
+  if ($("clickerTime")) $("clickerTime").textContent = String(clickerTimeLeft);
+  if ($("clickerBest")) $("clickerBest").textContent = String(clickerBest());
+}
+
+function resetClicker() {
+  stopClickerTimer();
+
+  clickerScore = 0;
+  clickerTimeLeft = 10;
+  clickerRunning = false;
+
+  updateClickerLabels();
+
+  if ($("clickTarget")) {
+    $("clickTarget").disabled = true;
+    $("clickTarget").textContent = "START";
+  }
+
+  if ($("clickerStart")) {
+    $("clickerStart").disabled = false;
+    $("clickerStart").textContent = "Start 10-second round";
+  }
+
+  if ($("clickerHint")) $("clickerHint").textContent = "Press Start, then tap the target!";
+  if ($("gameStatus")) $("gameStatus").textContent = "Click Rush is ready.";
+}
+
+function stopClickerTimer() {
+  if (clickerInterval) clearInterval(clickerInterval);
+  clickerInterval = null;
+  clickerRunning = false;
+}
+
+function startClicker() {
+  if (clickerRunning) return;
+
+  stopClickerTimer();
+
+  clickerScore = 0;
+  clickerTimeLeft = 10;
+  clickerRunning = true;
+
+  updateClickerLabels();
+
+  if ($("clickTarget")) {
+    $("clickTarget").disabled = false;
+    $("clickTarget").textContent = "TAP!";
+  }
+
+  if ($("clickerStart")) {
+    $("clickerStart").disabled = true;
+    $("clickerStart").textContent = "Round running...";
+  }
+
+  if ($("clickerHint")) $("clickerHint").textContent = "Go! Go! Go!";
+  if ($("gameStatus")) $("gameStatus").textContent = "Click as quickly as you can!";
+
+  clickerInterval = setInterval(() => {
+    clickerTimeLeft--;
+    updateClickerLabels();
+
+    if (clickerTimeLeft <= 0) finishClicker();
+  }, 1000);
+}
+
+function finishClicker() {
+  stopClickerTimer();
+
+  const best = Math.max(clickerBest(), clickerScore);
+  localStorage.setItem(STORAGE.clickerBest, String(best));
+
+  updateClickerLabels();
+
+  if ($("clickTarget")) {
+    $("clickTarget").disabled = true;
+    $("clickTarget").textContent = "FINISHED";
+  }
+
+  if ($("clickerStart")) {
+    $("clickerStart").disabled = false;
+    $("clickerStart").textContent = "Play again";
+  }
+
+  if ($("clickerHint")) {
+    $("clickerHint").textContent = `Time's up! You scored ${clickerScore}.`;
+  }
+
+  if ($("gameStatus")) {
+    $("gameStatus").textContent = `Click Rush finished. Score: ${clickerScore}.`;
+  }
+
+  submitScore("clicker", clickerScore);
+  showToast("Click Rush score: " + clickerScore);
+}
+
+if ($("clickerStart")) {
+  $("clickerStart").addEventListener("click", startClicker);
+}
+
+if ($("clickTarget")) {
+  $("clickTarget").addEventListener("click", () => {
+    if (!clickerRunning) return;
+
+    clickerScore++;
+    updateClickerLabels();
+
+    // Move the target slightly to keep the game engaging.
+    const target = $("clickTarget");
+    target.style.transform =
+      `translate(${Math.round(Math.random() * 36 - 18)}px, ${Math.round(Math.random() * 20 - 10)}px)`;
+  });
+}
+
+/* ==========================================
+   INITIALIZATION
+   ========================================== */
+
+function initializeSite() {
+  if ($("footerYear")) {
+    $("footerYear").textContent = String(new Date().getFullYear());
+  }
+
+  updateAuthUI();
+
+  resetSnake();
+  resetTTT();
+  resetMemory();
+  resetClicker();
+
+  const pathname = location.pathname.replace(/\/+$/, "");
+  const hash = location.hash.slice(1);
+
+  if (pathname.endsWith("/thanks")) {
+    showView("thanks", false);
+  } else if (VALID_VIEWS.includes(hash)) {
+    showView(hash, false);
+  } else {
+    showView("home", false);
+  }
+
+  showGame("snake", false);
+}
+
+initializeSite();
+
+</script>
 </body>
-</html>
+  </html>
